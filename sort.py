@@ -41,7 +41,7 @@ df["extension"] = df.file_name.apply(lambda x: x.split(".")[-1] if "." in x else
 
 df["file_flag"] = df.file_path.apply(lambda x: os.path.isfile(x))
 
-df["category"] = df.extension.str.lower().map(cat_mapper)
+df["category"] = df.extension.astype("str").str.lower().map(cat_mapper)
 
 df.loc[(df.category.isna()) & (df.file_flag == True), "category"] = "Others"
 

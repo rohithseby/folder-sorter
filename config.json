@@ -1,0 +1,67 @@
+{
+    "path": "C:\\Users\\rohit\\Downloads",
+    "categories": {
+        "Documents": [
+            "pdf",
+            "fdmdownload",
+            "xls",
+            "docx",
+            "otf",
+            "doc",
+            "zip",
+            "csv",
+            "txt",
+            "paper",
+            "xlsx",
+            "rar"
+        ],
+        "Images": [
+            "jpg",
+            "png",
+            "jpeg",
+            "svg",
+            "img",
+            "psd",
+            "bmp"
+        ],
+        "Videos": [
+            "mp4",
+            "mkv",
+            "gif",
+            "avi",
+            "avchd",
+            "flv",
+            "f4v",
+            "swf",
+            "mov"
+        ],
+        "Executables": [
+            "exe",
+            "msi"
+        ],
+        "Code": [
+            "js",
+            "py",
+            "ipynb",
+            "json",
+            "env",
+            "yml",
+            "yaml"
+        ],
+        "Subtitles": [
+            "srt"
+        ],
+        "Tableau": [
+            "twb",
+            "tbm",
+            "twbx",
+            "hyper",
+            "tdsx",
+            "tds"
+        ],
+        "Power BI": [
+            "pbix",
+            "pbit"
+        ]
+    }
+}

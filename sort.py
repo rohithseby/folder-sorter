@@ -14,13 +14,6 @@ for dir in config["categories"].keys():
 
 count = []
 
-for dir in list(config["categories"].keys()) + ["Others", "Folder"]:
-    try:
-        os.mkdir(os.path.join(path, dir))
-    except FileExistsError:
-        count.append(dir)
-        print(f"{dir} - folder already exists. Sorted files will get added to it")
-
 df = pd.DataFrame(
     {
         "file_name": [
@@ -29,7 +22,7 @@ df = pd.DataFrame(
             if x.lower()
             not in [
                 x.lower()
-                for x in list(config["categories"].keys()) + ["Others", "Folder"]
+                for x in list(config["categories"].keys()) + ["Others", "Folders"]
             ]
         ]
     }
@@ -45,9 +38,17 @@ df["category"] = df.extension.astype("str").str.lower().map(cat_mapper)
 
 df.loc[(df.category.isna()) & (df.file_flag == True), "category"] = "Others"
 
-df.loc[(df.category.isna()) & (df.file_flag == False), "category"] = "Folder"
+df.loc[(df.category.isna()) & (df.file_flag == False), "category"] = "Folders"
 
 file_list = df.to_dict(orient="records")
+
+if len(df.category) > 0:
+    for dir in df.category.tolist():
+        try:
+            os.mkdir(os.path.join(path, dir))
+        except FileExistsError:
+            count.append(dir)
+            print(f"{dir} - folder already exists. Sorted files will get added to it")
 
 c = input("Start sorting (y/n) ?? - ")
 
@@ -55,7 +56,11 @@ if c.lower() == "y":
     for file in file_list:
         src = os.path.join(path, file["file_name"])
         dst = os.path.join(path, file["category"], file["file_name"])
-        shutil.move(src=src, dst=dst)
+        try:
+            shutil.move(src=src, dst=dst)
+        except Exception as e:
+            print(src, e)
+            pass
     print("Sorted successfully")
     time.sleep(5)
 else:
